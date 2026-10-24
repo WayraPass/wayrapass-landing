@@ -1,0 +1,961 @@
+:host {
+  --wp-navy: #142344;
+  --wp-navy-2: #24365f;
+  --wp-cream: #f7f6f2;
+  --wp-paper: #ffffff;
+  --wp-blue: #78a9d0;
+  --wp-teal: #3d9691;
+  --wp-amber: #efb640;
+  --wp-text: #1e2e50;
+  --wp-muted: #687286;
+  --wp-line: #e1e3e7;
+  --wp-shadow: rgba(20, 35, 68, 0.1);
+  display: block;
+  color: var(--wp-text);
+  background: var(--wp-cream);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+:host, :host * {
+  box-sizing: border-box;
+}
+
+:host a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:host a:focus-visible {
+  outline: 3px solid var(--wp-amber);
+  outline-offset: 3px;
+}
+
+.page-shell {
+  min-height: 100vh;
+  background: var(--wp-cream);
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  min-height: 78px;
+  padding: 0 clamp(20px, 5vw, 76px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+  background: rgba(255, 255, 255, 0.96);
+  border-bottom: 1px solid rgba(20, 35, 68, 0.08);
+  backdrop-filter: blur(10px);
+}
+
+.site-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #f0b63f 0%, #f0b63f 18%, #142344 18%, #142344 58%, #3d9691 58%, #3d9691 100%);
+}
+
+.brand {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 11px;
+  background: var(--wp-navy);
+  color: var(--wp-amber);
+  font-size: 17px;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.brand-word {
+  color: var(--wp-navy);
+  font-size: 21px;
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+}
+
+.brand-word span {
+  color: var(--wp-amber);
+}
+
+.desktop-nav,
+.header-actions,
+.hero-actions,
+.how-actions,
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.desktop-nav a,
+.login-link {
+  position: relative;
+  z-index: 1;
+  color: #505d73;
+  font-size: 13px;
+  font-weight: 650;
+  transition: color 0.2s ease;
+}
+
+.desktop-nav a:hover,
+.login-link:hover,
+.footer-links a:hover {
+  color: var(--wp-teal);
+}
+
+.header-actions {
+  gap: 18px;
+}
+
+.button {
+  position: relative;
+  z-index: 1;
+  min-height: 49px;
+  padding: 0 21px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 760;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button-primary {
+  background: var(--wp-navy-2);
+  color: #fff !important;
+  box-shadow: 0 8px 20px rgba(20, 35, 68, 0.13);
+}
+
+.button-primary:hover {
+  background: #304675;
+  box-shadow: 0 12px 24px rgba(20, 35, 68, 0.19);
+}
+
+.button-outline {
+  border-color: #cbd2dc;
+  background: rgba(255, 255, 255, 0.68);
+  color: var(--wp-navy) !important;
+}
+
+.button-outline:hover {
+  background: white;
+  border-color: #8da1bd;
+}
+
+.button-small {
+  min-height: 41px;
+  padding-inline: 17px;
+  font-size: 12px;
+}
+
+main {
+  display: block;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(440px, 0.96fr);
+  gap: clamp(35px, 6vw, 85px);
+  align-items: center;
+  padding: 72px clamp(24px, 7vw, 104px) 76px;
+  background: radial-gradient(ellipse at 82% 20%, rgba(120, 169, 208, 0.17), transparent 36%), var(--wp-cream);
+}
+
+.hero-copy {
+  max-width: 590px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 20px;
+  color: #427a83;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 1.25px;
+  line-height: 1.6;
+}
+
+.eyebrow-dot,
+.live-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--wp-teal);
+  flex: 0 0 8px;
+}
+
+.hero h1 {
+  margin: 0;
+  color: var(--wp-navy);
+  font-size: clamp(43px, 5.2vw, 68px);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -2.6px;
+}
+
+.hero h1 span {
+  color: #c98f21;
+}
+
+.hero-description {
+  max-width: 550px;
+  margin: 23px 0 26px;
+  color: var(--wp-muted);
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.hero-actions {
+  flex-wrap: wrap;
+  gap: 13px;
+}
+
+.hero-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 23px;
+  color: #717b8c;
+  font-size: 11px;
+}
+
+.note-check {
+  display: grid;
+  place-items: center;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #d8ece6;
+  color: #267f75;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.host-preview {
+  display: inline-flex;
+  margin-top: 18px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(20, 35, 68, 0.12);
+  background: rgba(20, 35, 68, 0.04);
+  color: var(--wp-navy);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.hero-visual {
+  position: relative;
+  padding: 22px;
+  border: 1px solid rgba(20, 35, 68, 0.1);
+  border-radius: 23px;
+  background: #fff;
+  box-shadow: 0 25px 70px rgba(20, 35, 68, 0.1);
+  overflow: hidden;
+}
+
+.visual-topline {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #717b8c;
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.85px;
+}
+
+.visual-menu {
+  margin-left: auto;
+  color: #a2a9b5;
+  letter-spacing: 2px;
+}
+
+.simple-panel {
+  margin-top: 22px;
+  display: grid;
+  gap: 12px;
+}
+
+.simple-stat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--wp-line);
+  border-radius: 12px;
+  background: #fafbfc;
+}
+
+.simple-stat strong {
+  display: block;
+  color: var(--wp-navy);
+  font-size: 14px;
+}
+
+.simple-stat span {
+  display: block;
+  color: #707a8d;
+  font-size: 10px;
+  margin-top: 3px;
+}
+
+.simple-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 52px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(239, 182, 64, 0.12);
+  color: #7c5a12;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.visual-disclaimer {
+  margin: 18px 0 0;
+  color: #8d94a0;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.value-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  padding: 25px clamp(24px, 8vw, 120px);
+  background: #fff;
+  border-top: 1px solid var(--wp-line);
+  border-bottom: 1px solid var(--wp-line);
+}
+
+.value-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  min-width: 0;
+}
+
+.value-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  border-radius: 13px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.icon-blue {
+  background: #e6edf8;
+  color: #40648b;
+}
+
+.icon-teal {
+  background: #def0eb;
+  color: #2f8580;
+}
+
+.icon-amber {
+  background: #fff0d1;
+  color: #a87714;
+}
+
+.value-item h2 {
+  margin: 0 0 4px;
+  font-size: 12px;
+  color: var(--wp-navy);
+}
+
+.value-item p {
+  margin: 0;
+  color: #808797;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+.section {
+  padding: 92px clamp(24px, 8vw, 120px);
+}
+
+.features-section {
+  background: #fff;
+}
+
+.section-heading {
+  max-width: 670px;
+  margin: 0 auto 42px;
+  text-align: center;
+}
+
+.section-heading .eyebrow {
+  margin-bottom: 12px;
+}
+
+.section-heading h2,
+.roles-intro h2,
+.how-content h2 {
+  margin: 0;
+  color: var(--wp-navy);
+  font-size: clamp(33px, 3.6vw, 47px);
+  font-weight: 900;
+  line-height: 1.13;
+  letter-spacing: -1.5px;
+}
+
+.section-heading h2 span {
+  color: #b78223;
+}
+
+.section-heading > p:last-child {
+  max-width: 620px;
+  margin: 17px auto 0;
+  color: var(--wp-muted);
+  font-size: 13px;
+  line-height: 1.85;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 17px;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  padding: 25px;
+  border: 1px solid var(--wp-line);
+  border-radius: 16px;
+  background: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  border-color: #cbd6e1;
+  box-shadow: 0 18px 34px rgba(20, 35, 68, 0.07);
+}
+
+.feature-icon {
+  display: grid;
+  place-items: center;
+  width: 43px;
+  height: 43px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.icon-route { color: #41688b; background: #e7eef8; }
+.icon-travel { color: #297d79; background: #ddf0ec; }
+.icon-alert { color: #a87714; background: #fff0d2; }
+.icon-people { color: #446a93; background: #e7eef8; }
+.icon-driver { color: #a87714; background: #fff0d2; }
+.icon-manage { color: #297d79; background: #ddf0ec; }
+
+.feature-card h3 {
+  margin: 0;
+  color: var(--wp-navy);
+  font-size: 16px;
+}
+
+.feature-card p {
+  min-height: 68px;
+  margin: 11px 0 18px;
+  color: var(--wp-muted);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.feature-card span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #317f7e;
+  font-size: 10px;
+  font-weight: 850;
+}
+
+.roles-section {
+  display: grid;
+  grid-template-columns: minmax(250px, 0.76fr) minmax(0, 1.24fr);
+  gap: clamp(35px, 7vw, 100px);
+  padding: 92px clamp(24px, 8vw, 120px);
+  background: var(--wp-cream);
+}
+
+.roles-intro {
+  align-self: start;
+  position: sticky;
+  top: 28px;
+}
+
+.roles-intro > p:not(.eyebrow) {
+  margin: 17px 0 24px;
+  color: var(--wp-muted);
+  font-size: 13px;
+  line-height: 1.85;
+}
+
+.roles-list {
+  border-top: 1px solid #dfe2e5;
+}
+
+.role-item {
+  display: grid;
+  grid-template-columns: 29px 42px minmax(0, 1fr);
+  align-items: center;
+  gap: 13px;
+  padding: 20px 0;
+  border-bottom: 1px solid #dfe2e5;
+}
+
+.role-number {
+  color: #a5adba;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.role-icon {
+  display: grid;
+  place-items: center;
+  width: 41px;
+  height: 41px;
+  border-radius: 12px;
+  color: #41688b;
+  background: #e5edf7;
+  font-size: 21px;
+  font-weight: 850;
+}
+
+.role-icon-teal { color: #2f8580; background: #ddf0ec; }
+.role-icon-amber { color: #a87714; background: #fff0d2; }
+.role-icon-blue { color: #41688b; background: #e5edf7; }
+
+.role-item h3 {
+  margin: 0 0 5px;
+  color: var(--wp-navy);
+  font-size: 14px;
+}
+
+.role-item p {
+  margin: 0;
+  color: var(--wp-muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.roles-note {
+  display: flex;
+  gap: 10px;
+  margin-top: 17px;
+  padding: 13px;
+  border-radius: 10px;
+  background: #e1efeb;
+  color: #426f6c;
+}
+
+.roles-note > span {
+  display: grid;
+  place-items: center;
+  flex: 0 0 18px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  color: #2b7771;
+  background: #c9e4dd;
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.roles-note p {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.how-section {
+  padding: 78px clamp(24px, 8vw, 120px);
+  color: white;
+  background: var(--wp-navy);
+}
+
+.how-content {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.eyebrow-light {
+  color: #9fd1cd;
+}
+
+.how-content h2 {
+  color: #fff;
+}
+
+.how-intro {
+  max-width: 550px;
+  margin: 16px 0 0;
+  color: #c2cddd;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin: 39px 0 32px;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  align-items: start;
+  gap: 13px;
+  padding-top: 19px;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.step > span {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  color: #f5c65d;
+  background: rgba(239, 182, 64, 0.15);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.step h3 {
+  margin: 2px 0 8px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.step p {
+  margin: 0;
+  color: #c0cadd;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.how-actions {
+  gap: 23px;
+  flex-wrap: wrap;
+}
+
+.button-amber {
+  background: var(--wp-amber);
+  color: #172747 !important;
+}
+
+.button-amber:hover {
+  background: #f7c95f;
+}
+
+.how-login {
+  color: #e5ebf4 !important;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.site-footer {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px 26px;
+  padding: 29px clamp(20px, 5vw, 76px) 22px;
+  background: #fff;
+}
+
+.site-footer .brand-mark {
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+}
+
+.site-footer .brand-word {
+  font-size: 18px;
+}
+
+.site-footer > p {
+  margin: 0;
+  color: #788195;
+  font-size: 10px;
+  line-height: 1.7;
+}
+
+.footer-links {
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.footer-links a,
+.footer-links span {
+  color: #626d80;
+  font-size: 10px;
+  font-weight: 750;
+}
+
+.site-footer > small {
+  grid-column: 1 / -1;
+  padding-top: 16px;
+  border-top: 1px solid var(--wp-line);
+  color: #8991a0;
+  font-size: 10px;
+}
+
+.site-footer .footer-disclaimer {
+  grid-column: 1 / -1;
+  margin-top: -11px;
+  color: #9299a6;
+  font-size: 9px;
+}
+
+@media (max-width: 1050px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(370px, 0.9fr);
+    padding-inline: 38px;
+    gap: 30px;
+  }
+
+  .hero h1 {
+    font-size: clamp(42px, 5vw, 58px);
+  }
+
+  .roles-section {
+    gap: 40px;
+  }
+
+  .site-header {
+    padding-inline: 30px;
+  }
+}
+
+@media (max-width: 800px) {
+  .site-header {
+    min-height: 70px;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 14px 20px;
+  }
+
+  .brand-word {
+    font-size: 19px;
+  }
+
+  .desktop-nav {
+    order: 3;
+    flex: 1 0 100%;
+    justify-content: center;
+    gap: 25px;
+    padding-top: 10px;
+    border-top: 1px solid var(--wp-line);
+  }
+
+  .desktop-nav a {
+    font-size: 11px;
+  }
+
+  .header-actions {
+    gap: 12px;
+  }
+
+  .login-link {
+    font-size: 12px;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 55px 22px 64px;
+    gap: 38px;
+  }
+
+  .value-strip {
+    grid-template-columns: 1fr;
+    gap: 17px;
+    padding: 25px 28px;
+  }
+
+  .value-item {
+    justify-content: flex-start;
+    width: min(100%, 390px);
+    margin: 0 auto;
+  }
+
+  .section {
+    padding: 70px 22px;
+  }
+
+  .section-heading {
+    margin-bottom: 30px;
+    text-align: left;
+  }
+
+  .section-heading > p:last-child {
+    margin-inline: 0;
+  }
+
+  .feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .roles-section {
+    grid-template-columns: 1fr;
+    gap: 33px;
+    padding: 70px 22px;
+  }
+
+  .roles-intro {
+    position: static;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 32px;
+  }
+
+  .step {
+    max-width: 600px;
+  }
+
+  .site-footer {
+    grid-template-columns: 1fr;
+    gap: 13px;
+    padding: 27px 22px 20px;
+  }
+
+  .footer-links {
+    justify-content: flex-start;
+  }
+
+  .site-footer > small,
+  .site-footer .footer-disclaimer {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 520px) {
+  .desktop-nav {
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .desktop-nav a {
+    font-size: 10px;
+  }
+
+  .header-actions {
+    gap: 9px;
+  }
+
+  .button-small {
+    min-height: 37px;
+    padding-inline: 12px;
+    font-size: 10px;
+  }
+
+  .login-link {
+    font-size: 11px;
+  }
+
+  .hero {
+    padding-top: 43px;
+  }
+
+  .hero h1 {
+    font-size: clamp(39px, 10vw, 51px);
+    letter-spacing: -1.8px;
+  }
+
+  .hero-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+  }
+
+  .hero-note {
+    align-items: flex-start;
+    line-height: 1.6;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-card p {
+    min-height: 0;
+  }
+
+  .section-heading h2,
+  .roles-intro h2,
+  .how-content h2 {
+    font-size: 35px;
+  }
+
+  .role-item {
+    grid-template-columns: 23px 36px minmax(0, 1fr);
+    gap: 9px;
+  }
+
+  .role-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .role-item p {
+    font-size: 10px;
+  }
+
+  .how-actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .how-actions .button {
+    width: 100%;
+  }
+
+  .how-login {
+    text-align: center;
+  }
+}
