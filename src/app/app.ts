@@ -48,8 +48,6 @@ export class App {}
               <span class="button button-primary">Ingresar a WayraPass <span aria-hidden="true">→</span></span>
               <a class="button button-outline" href="#solucion">Conocer la plataforma</a>
             </div>
-            <div class="hero-note"><span class="note-check" aria-hidden="true">✓</span> Información organizada según el perfil de cada usuario</div>
-            <div class="host-preview">{{ hostUrl }}</div>
           </div>
 
           <div class="hero-visual" aria-label="Resumen del servicio de transporte estudiantil">
@@ -89,19 +87,31 @@ export class App {}
           </div>
         </section>
 
-        <section class="value-strip" id="solucion" aria-label="Enfoque de WayraPass">
-          <article class="value-item">
-            <span class="value-icon icon-blue" aria-hidden="true">⌖</span>
-            <div><h2>Información centralizada</h2><p>Rutas, horarios, paraderos y unidades.</p></div>
-          </article>
-          <article class="value-item">
-            <span class="value-icon icon-teal" aria-hidden="true">✓</span>
-            <div><h2>Más coordinación</h2><p>Estudiantes, familiares y responsables del servicio.</p></div>
-          </article>
-          <article class="value-item">
-            <span class="value-icon icon-amber" aria-hidden="true">↗</span>
-            <div><h2>Mayor trazabilidad</h2><p>Registro de viajes, abordajes e incidencias.</p></div>
-          </article>
+        <section class="memberships-section" id="solucion">
+          <div class="membership-intro">
+            <p class="eyebrow">MEMBRESÍAS</p>
+            <h2>Elige la membresía que encaja con tu comunidad.</h2>
+            <p>Accede a la experiencia WayraPass con planes diseñados para estudiantes, familias y equipos de operación.</p>
+          </div>
+
+          <div class="membership-grid">
+            <article class="membership-card" *ngFor="let plan of memberships; let i = index" [class.featured]="plan.featured">
+              <div class="membership-badge" *ngIf="plan.badge">{{ plan.badge }}</div>
+              <h3>{{ plan.name }}</h3>
+              <div class="membership-price">
+                <span class="currency">S/</span>
+                <span class="amount">{{ plan.price }}</span>
+                <span class="period">/mes</span>
+              </div>
+              <p class="membership-description">{{ plan.description }}</p>
+
+              <ul class="membership-list">
+                <li *ngFor="let item of plan.features">{{ item }}</li>
+              </ul>
+
+              <button class="membership-button" type="button">{{ plan.cta }}</button>
+            </article>
+          </div>
         </section>
 
         <section class="section features-section" id="funcionalidades">
@@ -120,47 +130,6 @@ export class App {}
             </article>
           </div>
         </section>
-
-        <section class="roles-section" id="perfiles">
-          <div class="roles-intro">
-            <p class="eyebrow">ACCESO SEGÚN EL PERFIL</p>
-            <h2>Una plataforma.<br />Cuatro roles.</h2>
-            <p>Cada persona accede a las funciones que corresponden a sus responsabilidades dentro del servicio de transporte estudiantil.</p>
-            <span class="button button-primary">Iniciar sesión <span aria-hidden="true">→</span></span>
-          </div>
-
-          <div class="roles-list">
-            <article class="role-item" *ngFor="let role of roles; let i = index">
-              <span class="role-number">0{{ i + 1 }}</span>
-              <span class="role-icon {{ roleClassNames[i] }}" aria-hidden="true">{{ roleIcons[i] }}</span>
-              <div>
-                <h3>{{ role.name }}</h3>
-                <p>{{ role.text }}</p>
-              </div>
-            </article>
-
-            <div class="roles-note"><span aria-hidden="true">i</span><p>El registro desde la plataforma está destinado a estudiantes y familias. Los choferes y coordinadores utilizan cuentas habilitadas por la administración.</p></div>
-          </div>
-        </section>
-
-        <section class="how-section" id="como-funciona">
-          <div class="how-content">
-            <p class="eyebrow eyebrow-light">EMPIEZA CON TU CUENTA</p>
-            <h2>Organiza mejor el viaje<br />con WayraPass.</h2>
-            <p class="how-intro">Accede a la plataforma y utiliza las herramientas disponibles para tu perfil.</p>
-
-            <div class="steps-grid">
-              <article class="step"><span>01</span><div><h3>Ingresa o crea tu cuenta</h3><p>Estudiantes y familias pueden iniciar el registro desde la plataforma.</p></div></article>
-              <article class="step"><span>02</span><div><h3>Entra a tu espacio</h3><p>WayraPass identifica tu perfil y determina las funcionalidades disponibles.</p></div></article>
-              <article class="step"><span>03</span><div><h3>Consulta la información</h3><p>Revisa las rutas, los viajes y los avisos a los que tienes acceso.</p></div></article>
-            </div>
-
-            <div class="how-actions">
-              <span class="button button-amber">Entrar a WayraPass <span aria-hidden="true">→</span></span>
-              <span class="how-login">Crear cuenta de estudiante o familiar <span aria-hidden="true">↗</span></span>
-            </div>
-          </div>
-        </section>
       </main>
 
       <footer class="site-footer">
@@ -174,7 +143,6 @@ export class App {}
         <nav class="footer-links" aria-label="Enlaces del pie de página">
           <a href="#solucion">La solución</a>
           <a href="#funcionalidades">Funcionalidades</a>
-          <a href="#perfiles">Perfiles</a>
           <span>Iniciar sesión</span>
         </nav>
 
@@ -187,6 +155,36 @@ export class App {}
 })
 export class LandingPage {
   readonly hostUrl = 'http://localhost:4200/';
+
+  readonly memberships = [
+    {
+      name: 'Básica',
+      price: 39,
+      description: 'Ideal para estudiantes que necesitan consultar rutas y horarios de forma ágil.',
+      badge: 'Popular',
+      featured: false,
+      cta: 'Elegir Básica',
+      features: ['Consulta de rutas', 'Horarios disponibles', 'Paraderos y viajes', 'Notificaciones básicas'],
+    },
+    {
+      name: 'Pro',
+      price: 79,
+      description: 'Pensada para familias y usuarios con mayor seguimiento de viajes y incidencias.',
+      badge: 'Más usada',
+      featured: true,
+      cta: 'Elegir Pro',
+      features: ['Todo de Básica', 'Seguimiento de viajes', 'Visibilidad de incidencias', 'Confirmación de abordaje'],
+    },
+    {
+      name: 'Empresarial',
+      price: 149,
+      description: 'Para equipos de operación y coordinación que gestionan varias rutas o grupos.',
+      badge: 'Equipo',
+      featured: false,
+      cta: 'Elegir Empresarial',
+      features: ['Todo de Pro', 'Gestión de rutas y flotillas', 'Reportes avanzados', 'Soporte prioritario'],
+    },
+  ];
 
   readonly features = [
     { title: 'Rutas, horarios y paraderos', text: 'Consulta las rutas disponibles, elige tu paradero e inscríbete o cambia de ruta.', icon: 'icon-route' },

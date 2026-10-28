@@ -747,6 +747,167 @@ main {
   font-size: 9px;
 }
 
+.memberships-section {
+  padding: 90px clamp(24px, 8vw, 120px);
+  background: linear-gradient(180deg, #f8f9fb 0%, #ffffff 100%);
+}
+
+.membership-intro {
+  max-width: 720px;
+  margin: 0 auto 36px;
+  text-align: center;
+}
+
+.membership-intro h2 {
+  margin: 0;
+  color: var(--wp-navy);
+  font-size: clamp(30px, 3vw, 46px);
+  line-height: 1.18;
+  letter-spacing: -1.5px;
+}
+
+.membership-intro p {
+  margin: 16px auto 0;
+  max-width: 620px;
+  color: var(--wp-muted);
+  font-size: 13px;
+  line-height: 1.85;
+}
+
+.membership-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  max-width: 1150px;
+  margin: 0 auto;
+}
+
+.membership-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 28px 24px 22px;
+  border: 1px solid var(--wp-line);
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 14px 22px rgba(20, 35, 68, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.membership-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(20, 35, 68, 0.13);
+  box-shadow: 0 22px 34px rgba(20, 35, 68, 0.08);
+}
+
+.membership-card.featured {
+  border-color: rgba(20, 35, 68, 0.15);
+  background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+  box-shadow: 0 22px 38px rgba(20, 35, 68, 0.08);
+}
+
+.membership-badge {
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: var(--wp-navy);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.membership-card h3 {
+  margin: 0;
+  color: var(--wp-navy);
+  font-size: 22px;
+}
+
+.membership-price {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  color: var(--wp-navy);
+}
+
+.membership-price .currency,
+.membership-price .period {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.membership-price .amount {
+  font-size: 42px;
+  font-weight: 900;
+  letter-spacing: -2px;
+}
+
+.membership-description {
+  margin: 0;
+  color: var(--wp-muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.membership-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 11px;
+}
+
+.membership-list li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--wp-text);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.membership-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--wp-teal);
+  font-weight: 900;
+}
+
+.membership-button {
+  margin-top: auto;
+  border: 0;
+  border-radius: 12px;
+  min-height: 46px;
+  background: var(--wp-navy);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.membership-button:hover {
+  transform: translateY(-2px);
+  background: #223a70;
+}
+
+.membership-card.featured .membership-button {
+  background: var(--wp-amber);
+  color: #172747;
+}
+
+.membership-card.featured .membership-button:hover {
+  background: #f5c75b;
+}
+
 @media (max-width: 1050px) {
   .hero {
     grid-template-columns: minmax(0, 1fr) minmax(370px, 0.9fr);
