@@ -42,7 +42,7 @@
   min-height: 78px;
   padding: 0 clamp(20px, 5vw, 76px);
   display: flex;
-  align-items: center;
+  a;
   justify-content: space-between;
   gap: 25px;
   background: rgba(255, 255, 255, 0.96);
