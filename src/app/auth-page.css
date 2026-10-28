@@ -1,0 +1,178 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  color: #1e2e50;
+  background: #f7f6f2;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+:host, :host * {
+  box-sizing: border-box;
+}
+
+:host a {
+  color: inherit;
+}
+
+.auth-page {
+  min-height: 100vh;
+  padding: 32px 20px;
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 28px;
+}
+
+.auth-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #142344;
+  text-decoration: none;
+  font-size: 21px;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.auth-brand > span:last-child span {
+  color: #efb640;
+}
+
+.brand-mark {
+  display: grid;
+  width: 35px;
+  height: 35px;
+  place-items: center;
+  border-radius: 11px;
+  color: #efb640;
+  background: #142344;
+}
+
+.auth-card {
+  width: min(100%, 470px);
+  padding: clamp(24px, 6vw, 42px);
+  border: 1px solid #e1e3e7;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 20px 55px rgba(20, 35, 68, 0.08);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 28px;
+  color: #687286;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: #3d9691;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+h1 {
+  margin: 0;
+  color: #142344;
+  font-size: clamp(30px, 7vw, 38px);
+  letter-spacing: -1px;
+}
+
+.auth-description {
+  margin: 10px 0 26px;
+  color: #687286;
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.plan-notice,
+.success-message {
+  display: grid;
+  gap: 5px;
+  margin: 0 0 20px;
+  padding: 13px;
+  border-radius: 10px;
+  color: #426f6c;
+  background: #e1efeb;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.success-message {
+  display: block;
+}
+
+form {
+  display: grid;
+  gap: 9px;
+}
+
+label {
+  margin-top: 7px;
+  color: #142344;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid #d5d9e0;
+  border-radius: 9px;
+  color: #1e2e50;
+  background: #fff;
+  font: inherit;
+}
+
+input:focus,
+select:focus {
+  border-color: #3d9691;
+  outline: 3px solid rgba(61, 150, 145, 0.16);
+}
+
+.field-error,
+.form-error {
+  color: #a33333;
+  font-size: 12px;
+}
+
+.form-error {
+  margin: 6px 0 0;
+}
+
+.submit-button {
+  min-height: 48px;
+  margin-top: 9px;
+  border: 0;
+  border-radius: 10px;
+  color: #fff;
+  background: #142344;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.submit-button:hover:not(:disabled) {
+  background: #24365f;
+}
+
+.submit-button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.auth-switch {
+  margin: 22px 0 0;
+  color: #687286;
+  text-align: center;
+  font-size: 13px;
+}
+
+.auth-switch a {
+  color: #267f75;
+  font-weight: 800;
+}

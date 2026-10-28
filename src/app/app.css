@@ -42,7 +42,7 @@
   min-height: 78px;
   padding: 0 clamp(20px, 5vw, 76px);
   display: flex;
-  a;
+  align-items: center;
   justify-content: space-between;
   gap: 25px;
   background: rgba(255, 255, 255, 0.96);
@@ -122,6 +122,14 @@
 
 .header-actions {
   gap: 18px;
+}
+
+.logout-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
 }
 
 .button {
@@ -498,13 +506,14 @@ main {
   line-height: 1.8;
 }
 
-.feature-card span {
+.feature-card .feature-action {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   color: #317f7e;
   font-size: 10px;
   font-weight: 850;
+  text-decoration: none;
 }
 
 .roles-section {
@@ -693,6 +702,96 @@ main {
   font-weight: 750;
 }
 
+.faq-section {
+  padding: 88px clamp(24px, 8vw, 120px);
+  background: #fff;
+}
+
+.faq-section .section-heading {
+  margin-bottom: 32px;
+}
+
+.faq-list {
+  max-width: 850px;
+  margin: 0 auto;
+  border-top: 1px solid var(--wp-line);
+}
+
+.faq-item {
+  padding: 19px 4px;
+  border-bottom: 1px solid var(--wp-line);
+}
+
+.faq-item summary {
+  color: var(--wp-navy);
+  font-size: 14px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.faq-item summary:focus-visible {
+  outline: 3px solid var(--wp-amber);
+  outline-offset: 4px;
+}
+
+.faq-item p {
+  max-width: 760px;
+  margin: 12px 0 0;
+  color: var(--wp-muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.contact-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 60px clamp(24px, 8vw, 120px);
+  background: #eaf2f1;
+}
+
+.contact-section > div {
+  max-width: 700px;
+}
+
+.contact-section h2,
+.privacy-section h2 {
+  margin: 0;
+  color: var(--wp-navy);
+  font-size: clamp(28px, 3vw, 38px);
+  line-height: 1.2;
+  letter-spacing: -1px;
+}
+
+.contact-section > div > p:last-child,
+.privacy-section > div > p:not(.eyebrow) {
+  margin: 14px 0 0;
+  color: var(--wp-muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.contact-section .button {
+  flex: 0 0 auto;
+}
+
+.privacy-section {
+  padding: 58px clamp(24px, 8vw, 120px);
+  background: #f7f6f2;
+}
+
+.privacy-section > div {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.privacy-section > div > p:last-child {
+  padding: 13px 15px;
+  border-left: 3px solid var(--wp-teal);
+  background: #fff;
+}
+
 .site-footer {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
@@ -772,6 +871,16 @@ main {
   color: var(--wp-muted);
   font-size: 13px;
   line-height: 1.85;
+}
+
+.membership-intro .membership-disclaimer {
+  max-width: 650px;
+  margin-top: 14px;
+  padding: 11px 15px;
+  border-radius: 10px;
+  color: #526179;
+  background: #eef1f5;
+  font-size: 12px;
 }
 
 .membership-grid {
@@ -882,6 +991,9 @@ main {
 }
 
 .membership-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: auto;
   border: 0;
   border-radius: 12px;
@@ -892,6 +1004,7 @@ main {
   font-weight: 800;
   cursor: pointer;
   transition: transform 0.2s ease, background 0.2s ease;
+  text-decoration: none;
 }
 
 .membership-button:hover {
@@ -1029,6 +1142,21 @@ main {
   .site-footer > small,
   .site-footer .footer-disclaimer {
     grid-column: 1;
+  }
+
+  .contact-section {
+    align-items: stretch;
+    flex-direction: column;
+    padding-block: 50px;
+  }
+
+  .contact-section .button {
+    align-self: flex-start;
+  }
+
+  .faq-section,
+  .privacy-section {
+    padding-block: 65px;
   }
 }
 

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class App {}
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   template: `
     <div class="page-shell">
       <header class="site-header">
@@ -25,12 +26,21 @@ export class App {}
         <nav class="desktop-nav" aria-label="Navegación principal">
           <a href="#solucion">La solución</a>
           <a href="#funcionalidades">Funcionalidades</a>
+          <a href="#como-funciona">Cómo funciona</a>
           <a href="#perfiles">Perfiles</a>
         </nav>
 
         <div class="header-actions">
-          <span class="login-link">Iniciar sesión</span>
-          <span class="button button-primary button-small">Crear cuenta <span aria-hidden="true">↗</span></span>
+          <ng-container *ngIf="auth.user(); else guestActions">
+            <span class="login-link">Hola, {{ auth.user()?.fullName }}</span>
+            <button class="login-link logout-button" type="button" (click)="logout()">Cerrar sesión</button>
+          </ng-container>
+          <ng-template #guestActions>
+            <a class="login-link" routerLink="/login">Iniciar sesión</a>
+            <a class="button button-primary button-small" routerLink="/register">
+              Crear cuenta <span aria-hidden="true">↗</span>
+            </a>
+          </ng-template>
         </div>
       </header>
 
@@ -45,7 +55,7 @@ export class App {}
               desde una misma plataforma.
             </p>
             <div class="hero-actions">
-              <span class="button button-primary">Ingresar a WayraPass <span aria-hidden="true">→</span></span>
+              <a class="button button-primary" routerLink="/login">Ingresar a WayraPass <span aria-hidden="true">→</span></a>
               <a class="button button-outline" href="#solucion">Conocer la plataforma</a>
             </div>
           </div>
@@ -92,6 +102,9 @@ export class App {}
             <p class="eyebrow">MEMBRESÍAS</p>
             <h2>Elige la membresía que encaja con tu comunidad.</h2>
             <p>Accede a la experiencia WayraPass con planes diseñados para estudiantes, familias y equipos de operación.</p>
+            <p class="membership-disclaimer">
+              Los precios publicados deben confirmarse con tu institución. Elegir un plan no genera un pago ni activa el servicio.
+            </p>
           </div>
 
           <div class="membership-grid">
@@ -109,7 +122,13 @@ export class App {}
                 <li *ngFor="let item of plan.features">{{ item }}</li>
               </ul>
 
-              <button class="membership-button" type="button">{{ plan.cta }}</button>
+              <a
+                class="membership-button"
+                [routerLink]="['/register']"
+                [queryParams]="{ plan: plan.id }"
+              >
+                {{ plan.cta }}
+              </a>
             </article>
           </div>
         </section>
@@ -126,8 +145,125 @@ export class App {}
               <div class="feature-icon {{ feature.icon }}" aria-hidden="true">✦</div>
               <h3>{{ feature.title }}</h3>
               <p>{{ feature.text }}</p>
-              <span>Entrar a la plataforma <span aria-hidden="true">→</span></span>
+              <a class="feature-action" routerLink="/login">Entrar a la plataforma <span aria-hidden="true">→</span></a>
             </article>
+          </div>
+        </section>
+
+        <section class="how-section" id="como-funciona">
+          <div class="how-content">
+            <p class="eyebrow eyebrow-light">ASÍ SE ORGANIZA EL SERVICIO</p>
+            <h2>De la ruta a los avisos del viaje.</h2>
+            <p class="how-intro">
+              WayraPass reúne la información que comparte el equipo de transporte de tu institución.
+              La disponibilidad de rutas y funciones depende de cada comunidad.
+            </p>
+            <div class="steps-grid">
+              <article class="step">
+                <span>01</span>
+                <div>
+                  <h3>La institución organiza</h3>
+                  <p>El equipo de transporte configura rutas, paraderos, unidades y horarios disponibles.</p>
+                </div>
+              </article>
+              <article class="step">
+                <span>02</span>
+                <div>
+                  <h3>El estudiante consulta</h3>
+                  <p>Revisa la información de su recorrido y registra el abordaje cuando esa función está habilitada.</p>
+                </div>
+              </article>
+              <article class="step">
+                <span>03</span>
+                <div>
+                  <h3>La comunidad recibe avisos</h3>
+                  <p>Los familiares vinculados pueden consultar avisos de viaje e incidencias según los permisos asignados.</p>
+                </div>
+              </article>
+            </div>
+            <div class="how-actions">
+              <a class="button button-amber" routerLink="/register">Crear cuenta</a>
+              <a class="how-login" href="#preguntas">Resolver mis dudas <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </section>
+
+        <section class="roles-section" id="perfiles">
+          <div class="roles-intro">
+            <p class="eyebrow">UNA EXPERIENCIA PARA CADA PERSONA</p>
+            <h2>Todos coordinados en el mismo viaje.</h2>
+            <p>WayraPass reúne a quienes usan y coordinan el transporte estudiantil, con información adecuada para cada perfil.</p>
+            <div class="roles-note">
+              <span aria-hidden="true">i</span>
+              <p>Los perfiles de chofer y coordinación son habilitados por el equipo de transporte.</p>
+            </div>
+          </div>
+          <div class="roles-list">
+            <article class="role-item" *ngFor="let role of roles; let i = index">
+              <span class="role-number">0{{ i + 1 }}</span>
+              <span class="role-icon" [ngClass]="roleClassNames[i]" aria-hidden="true">{{ roleIcons[i] }}</span>
+              <div>
+                <h3>{{ role.name }}</h3>
+                <p>{{ role.text }}</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="faq-section" id="preguntas">
+          <div class="section-heading">
+            <p class="eyebrow">PREGUNTAS FRECUENTES</p>
+            <h2>Información clara antes de empezar.</h2>
+            <p>Conoce qué ofrece la plataforma y qué debes confirmar con el equipo de transporte de tu institución.</p>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>¿WayraPass opera los buses?</summary>
+              <p>No. WayraPass centraliza información y comunicaciones; la operación del transporte corresponde a cada institución o proveedor.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Puedo registrarme como chofer o coordinador?</summary>
+              <p>Esos perfiles son habilitados por el equipo de transporte. El registro público está disponible para estudiantes y familiares.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Cómo vinculo a un familiar?</summary>
+              <p>Cuando la función está habilitada, el estudiante comparte un código temporal para autorizar el seguimiento. No compartas ese código con personas no autorizadas.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Crear una cuenta activa una ruta o contrata un plan?</summary>
+              <p>No. La cuenta permite acceder a la plataforma; confirma con tu institución la disponibilidad de rutas, los precios y las condiciones del servicio.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Quién puede responder sobre rutas y horarios?</summary>
+              <p>El equipo de transporte de tu institución administra esa información. Consulta con su coordinación para confirmar recorridos y disponibilidad.</p>
+            </details>
+          </div>
+        </section>
+
+        <section class="contact-section" id="contacto">
+          <div>
+            <p class="eyebrow">¿NECESITAS MÁS INFORMACIÓN?</p>
+            <h2>Conversemos desde tu comunidad.</h2>
+            <p>
+              Para conocer disponibilidad, precios o implementación, consulta con la coordinación de transporte
+              de tu institución. Ellos podrán orientarte sobre el servicio que ofrecen.
+            </p>
+          </div>
+          <a class="button button-primary" href="#preguntas">Ver preguntas frecuentes <span aria-hidden="true">→</span></a>
+        </section>
+
+        <section class="privacy-section" id="privacidad">
+          <div>
+            <p class="eyebrow">PRIVACIDAD Y ACCESO</p>
+            <h2>Tu información, según tu perfil.</h2>
+            <p>
+              Los datos visibles en WayraPass pueden incluir información de rutas y viajes. El acceso a avisos familiares
+              requiere una vinculación autorizada; protege tus credenciales y códigos temporales.
+            </p>
+            <p>
+              Antes de registrarte, solicita a tu institución información sobre el responsable del tratamiento,
+              los datos utilizados y sus canales de atención. Esta landing no reemplaza el aviso de privacidad de tu institución.
+            </p>
           </div>
         </section>
       </main>
@@ -143,7 +279,10 @@ export class App {}
         <nav class="footer-links" aria-label="Enlaces del pie de página">
           <a href="#solucion">La solución</a>
           <a href="#funcionalidades">Funcionalidades</a>
-          <span>Iniciar sesión</span>
+          <a href="#preguntas">Preguntas frecuentes</a>
+          <a href="#contacto">Contacto</a>
+          <a href="#privacidad">Privacidad</a>
+          <a routerLink="/login">Iniciar sesión</a>
         </nav>
 
         <small>WayraPass · Lima Metropolitana · Plataforma tecnológica de gestión de transporte estudiantil</small>
@@ -154,10 +293,11 @@ export class App {}
   styleUrl: './app.css',
 })
 export class LandingPage {
-  readonly hostUrl = 'http://localhost:4200/';
+  readonly auth = inject(AuthService);
 
   readonly memberships = [
     {
+      id: 'basica',
       name: 'Básica',
       price: 39,
       description: 'Ideal para estudiantes que necesitan consultar rutas y horarios de forma ágil.',
@@ -167,6 +307,7 @@ export class LandingPage {
       features: ['Consulta de rutas', 'Horarios disponibles', 'Paraderos y viajes', 'Notificaciones básicas'],
     },
     {
+      id: 'pro',
       name: 'Pro',
       price: 79,
       description: 'Pensada para familias y usuarios con mayor seguimiento de viajes y incidencias.',
@@ -176,6 +317,7 @@ export class LandingPage {
       features: ['Todo de Básica', 'Seguimiento de viajes', 'Visibilidad de incidencias', 'Confirmación de abordaje'],
     },
     {
+      id: 'empresarial',
       name: 'Empresarial',
       price: 149,
       description: 'Para equipos de operación y coordinación que gestionan varias rutas o grupos.',
@@ -204,4 +346,8 @@ export class LandingPage {
 
   readonly roleClassNames = ['role-icon-blue', 'role-icon-teal', 'role-icon-amber', 'role-icon-blue'];
   readonly roleIcons = ['⌂', '◎', '▰', '▦'];
+
+  logout(): void {
+    this.auth.logout();
+  }
 }
