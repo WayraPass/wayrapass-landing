@@ -1,3 +1,9 @@
+### WayraPass Landing Page
+
+Este repositorio contiene la landing page oficial de WayraPass, una plataforma web orientada a la gestión y consulta del servicio de transporte universitario.
+
+La landing page tiene como objetivo presentar de forma clara la propuesta del proyecto, sus principales funcionalidades, los perfiles de usuario involucrados y los beneficios del servicio, sirviendo como punto de entrada informativo antes de acceder a la aplicación principal.
+
 # WayrapassLanding
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.24.
