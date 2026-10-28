@@ -42,7 +42,7 @@
   min-height: 78px;
   padding: 0 clamp(20px, 5vw, 76px);
   display: flex;
-  a;
+  align-items: center;
   justify-content: space-between;
   gap: 25px;
   background: rgba(255, 255, 255, 0.96);
@@ -122,6 +122,14 @@
 
 .header-actions {
   gap: 18px;
+}
+
+.logout-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
 }
 
 .button {
@@ -498,13 +506,14 @@ main {
   line-height: 1.8;
 }
 
-.feature-card span {
+.feature-card .feature-action {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   color: #317f7e;
   font-size: 10px;
   font-weight: 850;
+  text-decoration: none;
 }
 
 .roles-section {
@@ -882,6 +891,9 @@ main {
 }
 
 .membership-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: auto;
   border: 0;
   border-radius: 12px;
@@ -892,6 +904,7 @@ main {
   font-weight: 800;
   cursor: pointer;
   transition: transform 0.2s ease, background 0.2s ease;
+  text-decoration: none;
 }
 
 .membership-button:hover {

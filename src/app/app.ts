@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class App {}
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   template: `
     <div class="page-shell">
       <header class="site-header">
@@ -29,8 +30,16 @@ export class App {}
         </nav>
 
         <div class="header-actions">
-          <span class="login-link">Iniciar sesión</span>
-          <span class="button button-primary button-small">Crear cuenta <span aria-hidden="true">↗</span></span>
+          <ng-container *ngIf="auth.user(); else guestActions">
+            <span class="login-link">Hola, {{ auth.user()?.fullName }}</span>
+            <button class="login-link logout-button" type="button" (click)="logout()">Cerrar sesión</button>
+          </ng-container>
+          <ng-template #guestActions>
+            <a class="login-link" routerLink="/login">Iniciar sesión</a>
+            <a class="button button-primary button-small" routerLink="/register">
+              Crear cuenta <span aria-hidden="true">↗</span>
+            </a>
+          </ng-template>
         </div>
       </header>
 
@@ -45,7 +54,7 @@ export class App {}
               desde una misma plataforma.
             </p>
             <div class="hero-actions">
-              <span class="button button-primary">Ingresar a WayraPass <span aria-hidden="true">→</span></span>
+              <a class="button button-primary" routerLink="/login">Ingresar a WayraPass <span aria-hidden="true">→</span></a>
               <a class="button button-outline" href="#solucion">Conocer la plataforma</a>
             </div>
           </div>
@@ -109,7 +118,13 @@ export class App {}
                 <li *ngFor="let item of plan.features">{{ item }}</li>
               </ul>
 
-              <button class="membership-button" type="button">{{ plan.cta }}</button>
+              <a
+                class="membership-button"
+                [routerLink]="['/register']"
+                [queryParams]="{ plan: plan.id }"
+              >
+                {{ plan.cta }}
+              </a>
             </article>
           </div>
         </section>
@@ -126,7 +141,29 @@ export class App {}
               <div class="feature-icon {{ feature.icon }}" aria-hidden="true">✦</div>
               <h3>{{ feature.title }}</h3>
               <p>{{ feature.text }}</p>
-              <span>Entrar a la plataforma <span aria-hidden="true">→</span></span>
+              <a class="feature-action" routerLink="/login">Entrar a la plataforma <span aria-hidden="true">→</span></a>
+            </article>
+          </div>
+        </section>
+
+        <section class="roles-section" id="perfiles">
+          <div class="roles-intro">
+            <p class="eyebrow">UNA EXPERIENCIA PARA CADA PERSONA</p>
+            <h2>Todos coordinados en el mismo viaje.</h2>
+            <p>WayraPass reúne a quienes usan y coordinan el transporte estudiantil, con información adecuada para cada perfil.</p>
+            <div class="roles-note">
+              <span aria-hidden="true">i</span>
+              <p>Los perfiles de chofer y coordinación son habilitados por el equipo de transporte.</p>
+            </div>
+          </div>
+          <div class="roles-list">
+            <article class="role-item" *ngFor="let role of roles; let i = index">
+              <span class="role-number">0{{ i + 1 }}</span>
+              <span class="role-icon" [ngClass]="roleClassNames[i]" aria-hidden="true">{{ roleIcons[i] }}</span>
+              <div>
+                <h3>{{ role.name }}</h3>
+                <p>{{ role.text }}</p>
+              </div>
             </article>
           </div>
         </section>
@@ -143,7 +180,7 @@ export class App {}
         <nav class="footer-links" aria-label="Enlaces del pie de página">
           <a href="#solucion">La solución</a>
           <a href="#funcionalidades">Funcionalidades</a>
-          <span>Iniciar sesión</span>
+          <a routerLink="/login">Iniciar sesión</a>
         </nav>
 
         <small>WayraPass · Lima Metropolitana · Plataforma tecnológica de gestión de transporte estudiantil</small>
@@ -154,10 +191,11 @@ export class App {}
   styleUrl: './app.css',
 })
 export class LandingPage {
-  readonly hostUrl = 'http://localhost:4200/';
+  readonly auth = inject(AuthService);
 
   readonly memberships = [
     {
+      id: 'basica',
       name: 'Básica',
       price: 39,
       description: 'Ideal para estudiantes que necesitan consultar rutas y horarios de forma ágil.',
@@ -167,6 +205,7 @@ export class LandingPage {
       features: ['Consulta de rutas', 'Horarios disponibles', 'Paraderos y viajes', 'Notificaciones básicas'],
     },
     {
+      id: 'pro',
       name: 'Pro',
       price: 79,
       description: 'Pensada para familias y usuarios con mayor seguimiento de viajes y incidencias.',
@@ -176,6 +215,7 @@ export class LandingPage {
       features: ['Todo de Básica', 'Seguimiento de viajes', 'Visibilidad de incidencias', 'Confirmación de abordaje'],
     },
     {
+      id: 'empresarial',
       name: 'Empresarial',
       price: 149,
       description: 'Para equipos de operación y coordinación que gestionan varias rutas o grupos.',
@@ -204,4 +244,8 @@ export class LandingPage {
 
   readonly roleClassNames = ['role-icon-blue', 'role-icon-teal', 'role-icon-amber', 'role-icon-blue'];
   readonly roleIcons = ['⌂', '◎', '▰', '▦'];
+
+  logout(): void {
+    this.auth.logout();
+  }
 }
