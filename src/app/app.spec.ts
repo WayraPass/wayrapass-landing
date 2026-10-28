@@ -30,6 +30,11 @@ describe('App', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('h1')?.textContent).toContain('Tu camino a clases');
     expect(compiled.querySelector('#perfiles')).toBeTruthy();
+    expect(compiled.querySelector('#como-funciona')).toBeTruthy();
+    expect(compiled.querySelectorAll('#preguntas .faq-item')).toHaveLength(5);
+    expect(compiled.querySelector('#contacto')).toBeTruthy();
+    expect(compiled.querySelector('#privacidad')).toBeTruthy();
+    expect(compiled.querySelector('.membership-disclaimer')?.textContent).toContain('no genera un pago');
   });
 
   it('should navigate to login and registration pages', async () => {
