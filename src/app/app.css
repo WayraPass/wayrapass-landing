@@ -969,8 +969,8 @@ main {
   border: 0;
   border-radius: 12px;
   min-height: 46px;
-  background: var(--wp-navy);
-  color: #fff;
+  background: var(--wp-amber);
+  color: #172747;
   font-size: 12px;
   font-weight: 800;
   cursor: pointer;
@@ -980,7 +980,7 @@ main {
 
 .membership-button:hover {
   transform: translateY(-2px);
-  background: #294679;
+    background: #f5c75b;
 }
 
 .membership-card.featured .membership-button {
