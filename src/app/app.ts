@@ -24,10 +24,11 @@ export class App {}
         </a>
 
         <nav class="desktop-nav" aria-label="Navegación principal">
-          <a href="#solucion">La solución</a>
+          <a href="#solucion">Membresía</a>
           <a href="#funcionalidades">Funcionalidades</a>
           <a href="#como-funciona">Cómo funciona</a>
           <a href="#perfiles">Perfiles</a>
+          <a href="#preguntas">Preguntas frecuentes</a>
         </nav>
 
         <div class="header-actions">
