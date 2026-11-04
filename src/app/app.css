@@ -1,15 +1,15 @@
 :host {
-  --wp-navy: #142344;
-  --wp-navy-2: #24365f;
-  --wp-cream: #f7f6f2;
+  --wp-navy: #06213f;
+  --wp-navy-2: #263f73;
+  --wp-cream: #f7f7f5;
   --wp-paper: #ffffff;
-  --wp-blue: #78a9d0;
-  --wp-teal: #3d9691;
-  --wp-amber: #efb640;
-  --wp-text: #1e2e50;
-  --wp-muted: #687286;
-  --wp-line: #e1e3e7;
-  --wp-shadow: rgba(20, 35, 68, 0.1);
+  --wp-blue: #75acd6;
+  --wp-teal: #3b9694;
+  --wp-amber: #f9b723;
+  --wp-text: #06213f;
+  --wp-muted: #7a8894;
+  --wp-line: #d9dee3;
+  --wp-shadow: rgba(6, 33, 63, 0.1);
   display: block;
   color: var(--wp-text);
   background: var(--wp-cream);
@@ -46,7 +46,7 @@
   justify-content: space-between;
   gap: 25px;
   background: rgba(255, 255, 255, 0.96);
-  border-bottom: 1px solid rgba(20, 35, 68, 0.08);
+  border-bottom: 1px solid rgba(6, 33, 63, 0.08);
   backdrop-filter: blur(10px);
 }
 
@@ -57,7 +57,7 @@
   left: 0;
   right: 0;
   height: 5px;
-  background: linear-gradient(90deg, #f0b63f 0%, #f0b63f 18%, #142344 18%, #142344 58%, #3d9691 58%, #3d9691 100%);
+  background: linear-gradient(90deg, var(--wp-amber) 0%, var(--wp-amber) 18%, var(--wp-navy) 18%, var(--wp-navy) 58%, var(--wp-teal) 58%, var(--wp-teal) 100%);
 }
 
 .brand {
@@ -108,7 +108,7 @@
 .login-link {
   position: relative;
   z-index: 1;
-  color: #505d73;
+  color: #536071;
   font-size: 13px;
   font-weight: 650;
   transition: color 0.2s ease;
@@ -155,12 +155,12 @@
 .button-primary {
   background: var(--wp-navy-2);
   color: #fff !important;
-  box-shadow: 0 8px 20px rgba(20, 35, 68, 0.13);
+  box-shadow: 0 8px 20px rgba(6, 33, 63, 0.13);
 }
 
 .button-primary:hover {
-  background: #304675;
-  box-shadow: 0 12px 24px rgba(20, 35, 68, 0.19);
+  background: #294679;
+  box-shadow: 0 12px 24px rgba(6, 33, 63, 0.19);
 }
 
 .button-outline {
@@ -190,7 +190,7 @@ main {
   gap: clamp(35px, 6vw, 85px);
   align-items: center;
   padding: 72px clamp(24px, 7vw, 104px) 76px;
-  background: radial-gradient(ellipse at 82% 20%, rgba(120, 169, 208, 0.17), transparent 36%), var(--wp-cream);
+  background: radial-gradient(ellipse at 82% 20%, rgba(117, 172, 214, 0.17), transparent 36%), var(--wp-cream);
 }
 
 .hero-copy {
@@ -270,8 +270,8 @@ main {
   margin-top: 18px;
   padding: 8px 12px;
   border-radius: 999px;
-  border: 1px solid rgba(20, 35, 68, 0.12);
-  background: rgba(20, 35, 68, 0.04);
+  border: 1px solid rgba(6, 33, 63, 0.12);
+  background: rgba(6, 33, 63, 0.04);
   color: var(--wp-navy);
   font-size: 12px;
   font-weight: 700;
@@ -281,10 +281,10 @@ main {
 .hero-visual {
   position: relative;
   padding: 22px;
-  border: 1px solid rgba(20, 35, 68, 0.1);
+  border: 1px solid rgba(6, 33, 63, 0.1);
   border-radius: 23px;
   background: #fff;
-  box-shadow: 0 25px 70px rgba(20, 35, 68, 0.1);
+  box-shadow: 0 25px 70px rgba(6, 33, 63, 0.1);
   overflow: hidden;
 }
 
@@ -332,19 +332,6 @@ main {
   color: #707a8d;
   font-size: 10px;
   margin-top: 3px;
-}
-
-.simple-badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 52px;
-  padding: 8px 10px;
-  border-radius: 999px;
-  background: rgba(239, 182, 64, 0.12);
-  color: #7c5a12;
-  font-size: 10px;
-  font-weight: 800;
 }
 
 .visual-disclaimer {
@@ -471,7 +458,7 @@ main {
 .feature-card:hover {
   transform: translateY(-4px);
   border-color: #cbd6e1;
-  box-shadow: 0 18px 34px rgba(20, 35, 68, 0.07);
+  box-shadow: 0 18px 34px rgba(6, 33, 63, 0.07);
 }
 
 .feature-icon {
@@ -664,7 +651,7 @@ main {
   height: 36px;
   border-radius: 11px;
   color: #f5c65d;
-  background: rgba(239, 182, 64, 0.15);
+  background: rgba(249, 183, 35, 0.15);
   font-size: 11px;
   font-weight: 900;
 }
@@ -778,18 +765,12 @@ main {
 
 .privacy-section {
   padding: 58px clamp(24px, 8vw, 120px);
-  background: #f7f6f2;
+  background: var(--wp-cream);
 }
 
 .privacy-section > div {
   max-width: 850px;
   margin: 0 auto;
-}
-
-.privacy-section > div > p:last-child {
-  padding: 13px 15px;
-  border-left: 3px solid var(--wp-teal);
-  background: #fff;
 }
 
 .site-footer {
@@ -873,19 +854,9 @@ main {
   line-height: 1.85;
 }
 
-.membership-intro .membership-disclaimer {
-  max-width: 650px;
-  margin-top: 14px;
-  padding: 11px 15px;
-  border-radius: 10px;
-  color: #526179;
-  background: #eef1f5;
-  font-size: 12px;
-}
-
 .membership-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
   max-width: 1150px;
   margin: 0 auto;
@@ -900,20 +871,20 @@ main {
   border: 1px solid var(--wp-line);
   border-radius: 20px;
   background: #fff;
-  box-shadow: 0 14px 22px rgba(20, 35, 68, 0.04);
+  box-shadow: 0 14px 22px rgba(6, 33, 63, 0.04);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .membership-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(20, 35, 68, 0.13);
-  box-shadow: 0 22px 34px rgba(20, 35, 68, 0.08);
+  border-color: rgba(6, 33, 63, 0.13);
+  box-shadow: 0 22px 34px rgba(6, 33, 63, 0.08);
 }
 
 .membership-card.featured {
-  border-color: rgba(20, 35, 68, 0.15);
+  border-color: rgba(6, 33, 63, 0.15);
   background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
-  box-shadow: 0 22px 38px rgba(20, 35, 68, 0.08);
+  box-shadow: 0 22px 38px rgba(6, 33, 63, 0.08);
 }
 
 .membership-badge {
@@ -998,8 +969,8 @@ main {
   border: 0;
   border-radius: 12px;
   min-height: 46px;
-  background: var(--wp-navy);
-  color: #fff;
+  background: var(--wp-amber);
+  color: #172747;
   font-size: 12px;
   font-weight: 800;
   cursor: pointer;
@@ -1009,7 +980,7 @@ main {
 
 .membership-button:hover {
   transform: translateY(-2px);
-  background: #223a70;
+    background: #f5c75b;
 }
 
 .membership-card.featured .membership-button {
@@ -1107,6 +1078,10 @@ main {
 
   .feature-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .membership-grid {
+    grid-template-columns: 1fr;
   }
 
   .roles-section {

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterOutlet } from '@angular/router';
 import { AuthService } from './core/services/auth.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class App {}
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   template: `
     <div class="page-shell">
       <header class="site-header">
@@ -24,10 +24,11 @@ export class App {}
         </a>
 
         <nav class="desktop-nav" aria-label="Navegación principal">
-          <a href="#solucion">La solución</a>
+          <a href="#solucion">Membresía</a>
           <a href="#funcionalidades">Funcionalidades</a>
           <a href="#como-funciona">Cómo funciona</a>
           <a href="#perfiles">Perfiles</a>
+          <a href="#preguntas">Preguntas frecuentes</a>
         </nav>
 
         <div class="header-actions">
@@ -36,8 +37,8 @@ export class App {}
             <button class="login-link logout-button" type="button" (click)="logout()">Cerrar sesión</button>
           </ng-container>
           <ng-template #guestActions>
-            <a class="login-link" routerLink="/login">Iniciar sesión</a>
-            <a class="button button-primary button-small" routerLink="/register">
+            <a class="button button-primary button-small" [href]="webAppLoginUrl">Acceder</a>
+            <a class="button button-primary button-small" [href]="webAppRegisterUrl">
               Crear cuenta <span aria-hidden="true">↗</span>
             </a>
           </ng-template>
@@ -55,15 +56,15 @@ export class App {}
               desde una misma plataforma.
             </p>
             <div class="hero-actions">
-              <a class="button button-primary" routerLink="/login">Ingresar a WayraPass <span aria-hidden="true">→</span></a>
+              <a class="button button-primary" [href]="webAppLoginUrl">Ingresar a WayraPass <span aria-hidden="true">→</span></a>
               <a class="button button-outline" href="#solucion">Conocer la plataforma</a>
             </div>
           </div>
 
-          <div class="hero-visual" aria-label="Resumen del servicio de transporte estudiantil">
+          <div class="hero-visual" aria-label="Características del servicio de transporte estudiantil">
             <div class="visual-topline">
               <span class="live-indicator"></span>
-              <span>ESTADO DEL SERVICIO</span>
+              <span>CARACTERÍSTICAS DEL SERVICIO</span>
               <span class="visual-menu" aria-hidden="true">•••</span>
             </div>
 
@@ -71,25 +72,22 @@ export class App {}
               <div class="simple-stat">
                 <div>
                   <strong>Paraderos activos</strong>
-                  <span>Rutas principales y coordinadas</span>
+                  <span>Consulta paraderos y puntos disponibles de las rutas.</span>
                 </div>
-                <span class="simple-badge">18</span>
               </div>
 
               <div class="simple-stat">
                 <div>
                   <strong>Viajes registrados</strong>
-                  <span>Abordajes y llegadas visibles</span>
+                  <span>Los recorridos y abordajes quedan registrados en la plataforma.</span>
                 </div>
-                <span class="simple-badge">92%</span>
               </div>
 
               <div class="simple-stat">
                 <div>
-                  <strong>Incidencias gestionadas</strong>
-                  <span>Desvíos, retrasos y reasignaciones</span>
+                  <strong>Avisos de incidencias</strong>
+                  <span>Recibe información sobre incidencias reportadas durante el recorrido.</span>
                 </div>
-                <span class="simple-badge">Hoy</span>
               </div>
             </div>
 
@@ -101,10 +99,7 @@ export class App {}
           <div class="membership-intro">
             <p class="eyebrow">MEMBRESÍAS</p>
             <h2>Elige la membresía que encaja con tu comunidad.</h2>
-            <p>Accede a la experiencia WayraPass con planes diseñados para estudiantes, familias y equipos de operación.</p>
-            <p class="membership-disclaimer">
-              Los precios publicados deben confirmarse con tu institución. Elegir un plan no genera un pago ni activa el servicio.
-            </p>
+            <p>Accede a la experiencia WayraPass con planes diseñados para estudiantes y familias.</p>
           </div>
 
           <div class="membership-grid">
@@ -124,8 +119,7 @@ export class App {}
 
               <a
                 class="membership-button"
-                [routerLink]="['/register']"
-                [queryParams]="{ plan: plan.id }"
+                [href]="webAppRegisterUrl"
               >
                 {{ plan.cta }}
               </a>
@@ -145,7 +139,7 @@ export class App {}
               <div class="feature-icon {{ feature.icon }}" aria-hidden="true">✦</div>
               <h3>{{ feature.title }}</h3>
               <p>{{ feature.text }}</p>
-              <a class="feature-action" routerLink="/login">Entrar a la plataforma <span aria-hidden="true">→</span></a>
+              <a class="feature-action" [href]="webAppLoginUrl">Entrar a la plataforma <span aria-hidden="true">→</span></a>
             </article>
           </div>
         </section>
@@ -182,7 +176,7 @@ export class App {}
               </article>
             </div>
             <div class="how-actions">
-              <a class="button button-amber" routerLink="/register">Crear cuenta</a>
+              <a class="button button-amber" [href]="webAppRegisterUrl">Crear cuenta</a>
               <a class="how-login" href="#preguntas">Resolver mis dudas <span aria-hidden="true">→</span></a>
             </div>
           </div>
@@ -260,10 +254,6 @@ export class App {}
               Los datos visibles en WayraPass pueden incluir información de rutas y viajes. El acceso a avisos familiares
               requiere una vinculación autorizada; protege tus credenciales y códigos temporales.
             </p>
-            <p>
-              Antes de registrarte, solicita a tu institución información sobre el responsable del tratamiento,
-              los datos utilizados y sus canales de atención. Esta landing no reemplaza el aviso de privacidad de tu institución.
-            </p>
           </div>
         </section>
       </main>
@@ -282,7 +272,7 @@ export class App {}
           <a href="#preguntas">Preguntas frecuentes</a>
           <a href="#contacto">Contacto</a>
           <a href="#privacidad">Privacidad</a>
-          <a routerLink="/login">Iniciar sesión</a>
+          <a [href]="webAppLoginUrl">Iniciar sesión</a>
         </nav>
 
         <small>WayraPass · Lima Metropolitana · Plataforma tecnológica de gestión de transporte estudiantil</small>
@@ -294,37 +284,41 @@ export class App {}
 })
 export class LandingPage {
   readonly auth = inject(AuthService);
+  readonly webAppLoginUrl = 'http://localhost:4200/login';
+  readonly webAppRegisterUrl = 'http://localhost:4200/register';
 
   readonly memberships = [
     {
-      id: 'basica',
-      name: 'Básica',
-      price: 39,
-      description: 'Ideal para estudiantes que necesitan consultar rutas y horarios de forma ágil.',
-      badge: 'Popular',
-      featured: false,
-      cta: 'Elegir Básica',
-      features: ['Consulta de rutas', 'Horarios disponibles', 'Paraderos y viajes', 'Notificaciones básicas'],
-    },
-    {
       id: 'pro',
       name: 'Pro',
-      price: 79,
-      description: 'Pensada para familias y usuarios con mayor seguimiento de viajes y incidencias.',
-      badge: 'Más usada',
+      price: 18,
+      description: 'Para estudiantes que quieren aprovechar las funcionalidades avanzadas de WayraPass y los servicios inteligentes de WayrIA.',
+      badge: 'Individual',
       featured: true,
       cta: 'Elegir Pro',
-      features: ['Todo de Básica', 'Seguimiento de viajes', 'Visibilidad de incidencias', 'Confirmación de abordaje'],
+      features: [
+        'Todo lo incluido en la experiencia estándar de WayraPass',
+        'Acceso a funcionalidades inteligentes de WayrIA conforme sean habilitadas',
+        'Consultas inteligentes sobre rutas y horarios cuando estén disponibles',
+        'Alertas inteligentes cuando estén disponibles',
+        'Resúmenes y asistencia inteligente cuando estén disponibles',
+      ],
     },
     {
-      id: 'empresarial',
-      name: 'Empresarial',
-      price: 149,
-      description: 'Para equipos de operación y coordinación que gestionan varias rutas o grupos.',
-      badge: 'Equipo',
+      id: 'familiar',
+      name: 'Familiar',
+      price: 50,
+      description: 'Pensado para familias que desean gestionar en una sola membresía el servicio de hasta cuatro estudiantes.',
+      badge: 'Familias',
       featured: false,
-      cta: 'Elegir Empresarial',
-      features: ['Todo de Pro', 'Gestión de rutas y flotillas', 'Reportes avanzados', 'Soporte prioritario'],
+      cta: 'Elegir Familiar',
+      features: [
+        'Hasta 4 estudiantes',
+        'Seguimiento familiar',
+        'Historial de viajes',
+        'Avisos de abordaje e incidencias',
+        'Funcionalidades avanzadas y WayrIA para las cuentas incluidas conforme sean habilitadas',
+      ],
     },
   ];
 
